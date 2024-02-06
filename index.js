@@ -119,6 +119,10 @@ const authenticateToken = (request, response, next) => {
   }
 };
 
+app.get("/", async (request, response) => {
+  response.send(`<h1>This is server homePage</h1>`);
+});
+
 // Create New Todo Api.
 app.post("/new-todo", authenticateToken, async (request, response) => {
   const {
