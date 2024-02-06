@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { sign, verify } = require("jsonwebtoken");
-// const cors = require("cors");
+const cors = require("cors");
 const path = require("path");
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
@@ -10,19 +10,19 @@ const { hash, compare } = require("bcrypt");
 const SecretKey = "324GFgjkWYMkl27ls3f7#$3eul37jfl27#$@*(@*(^&53";
 
 const app = express();
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 const PORT = process.env.PORT || 8081;
 
 const dbPath = path.join(__dirname, "todo.db");
 let db = null;
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.header("Access-Control-Allow-Headers", "Content-Type");
-//   next();
-// });
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://todoabbasi.netlify.app/");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 // Initializing DB And Server.
 const initializeDBAndServer = async () => {
